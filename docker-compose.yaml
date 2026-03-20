@@ -1,0 +1,25 @@
+services:
+  id-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: id-generator
+    restart: unless-stopped
+    ports:
+      - "50059:50059"
+    volumes:
+      - ./configs:/configs:ro
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - go-net
+    healthcheck:
+      test: ["CMD", "true"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+networks:
+  go-net:
+    external: true
