@@ -1,0 +1,6 @@
+server:
+  port: 50059
+  mode: debug
+
+snowflake:
+  node_id: 1
