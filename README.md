@@ -1,4 +1,4 @@
-# ID Generator Service 🔢
+# ID Generator Service
 
 分布式唯一 ID 生成服务。基于 Twitter Snowflake 算法，通过 gRPC 对外提供高性能、全局唯一的 ID 发号能力。
 
