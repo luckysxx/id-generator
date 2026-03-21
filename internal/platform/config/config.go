@@ -4,10 +4,12 @@ import (
 	"log"
 	"strings"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
 type Config struct {
+	AppEnv    string          `mapstructure:"app_env"`
 	Server    ServerConfig    `mapstructure:"server"`
 	Snowflake SnowflakeConfig `mapstructure:"snowflake"`
 }
@@ -21,25 +23,26 @@ type SnowflakeConfig struct {
 	NodeID int64 `mapstructure:"node_id"`
 }
 
-// LoadConfig 解析 yaml 文件与环境变量
+// LoadConfig 从 Viper 加载配置，支持 .env 文件覆盖
 func LoadConfig() *Config {
+	_ = godotenv.Load()
+
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./configs")    // 本地运行能找到
-	viper.AddConfigPath("/app/configs") // 容器生产运行能找到
-	viper.AddConfigPath(".")            // 备用路径
+	viper.AddConfigPath("./configs")
+	viper.AddConfigPath("/app/configs")
+	viper.AddConfigPath(".")
 
-	// 支持环境变量，配置的下划线分隔，比如 SERVER_PORT
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatalf("加载配置失败: %v", err)
+		log.Printf("警告: 未找到 config.yaml，将完全依赖环境变量: %v", err)
 	}
 
 	var cfg Config
 	if err := viper.Unmarshal(&cfg); err != nil {
-		log.Fatalf("反序列化配置失败: %v", err)
+		log.Fatalf("配置反序列化失败: %v", err)
 	}
 
 	return &cfg

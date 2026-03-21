@@ -11,6 +11,8 @@ services:
       - ./configs:/configs:ro
     environment:
       - TZ=Asia/Shanghai
+    env_file:
+      - .env
     networks:
       - go-net
     healthcheck:

@@ -4,6 +4,7 @@ go 1.25.5
 
 require (
 	github.com/bwmarrin/snowflake v0.3.0
+	github.com/joho/godotenv v1.5.1
 	github.com/luckysxx/common v0.1.0
 	github.com/spf13/viper v1.21.0
 	go.uber.org/zap v1.27.1
