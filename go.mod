@@ -5,7 +5,7 @@ go 1.25.5
 require (
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/joho/godotenv v1.5.1
-	github.com/luckysxx/common/proto v0.0.0-00010101000000-000000000000
+	github.com/luckysxx/common/proto v0.3.0
 	github.com/spf13/viper v1.21.0
 	go.uber.org/zap v1.27.1
 	google.golang.org/grpc v1.79.3
@@ -49,7 +49,7 @@ require (
 require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
-	github.com/luckysxx/common/logger v0.0.0
+	github.com/luckysxx/common/logger v0.3.0
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sourcegraph/conc v0.3.1-0.20240121214520-5f936abd7ae8 // indirect
@@ -65,21 +65,3 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260311181403-84a4fc48630c // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
-
-replace github.com/luckysxx/common/crypto => ../common/crypto
-
-replace github.com/luckysxx/common/errs => ../common/errs
-
-replace github.com/luckysxx/common/logger => ../common/logger
-
-replace github.com/luckysxx/common/otel => ../common/otel
-
-replace github.com/luckysxx/common/proto => ../common/proto
-
-replace github.com/luckysxx/common/ratelimiter => ../common/ratelimiter
-
-replace github.com/luckysxx/common/redis => ../common/redis
-
-replace github.com/luckysxx/common/rpc => ../common/rpc
-
-replace github.com/luckysxx/common/trace => ../common/trace
