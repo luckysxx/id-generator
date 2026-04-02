@@ -2,7 +2,7 @@
 FROM golang:1.25.5-alpine AS builder
 WORKDIR /app
 
-ENV GOPROXY=https://goproxy.cn,direct
+ENV GOPROXY=https://proxy.golang.org,direct
 
 COPY go.mod go.sum ./
 RUN --mount=type=cache,target=/go/pkg/mod \
