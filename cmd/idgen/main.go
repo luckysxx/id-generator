@@ -9,6 +9,7 @@ import (
 	"syscall"
 
 	"github.com/luckysxx/common/logger"
+	"github.com/luckysxx/common/probe"
 	pb "github.com/luckysxx/common/proto/idgen"
 	"github.com/luckysxx/id-generator/internal/idgen"
 	"github.com/luckysxx/id-generator/internal/platform/config"
@@ -63,6 +64,12 @@ func main() {
 			logg.Fatal("发号器服务异常终止", zap.Error(err))
 		}
 	}()
+
+	// 7. 探针管理端口：/healthz, /readyz, /metrics
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	probeShutdown := probe.Serve(ctx, ":9096", logg)
+	defer probeShutdown()
 
 	// 拦截终止信号实现优雅停机
 	stop := make(chan os.Signal, 1)
